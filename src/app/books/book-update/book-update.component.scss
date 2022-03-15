@@ -1,0 +1,15 @@
+form{
+  display: flex;
+  flex-direction: column;
+}
+.edit{
+  margin-right: 10px;
+}
+
+.edit > i {
+  color: #d9cd26;
+}
+
+.delete > i {
+  color:#a34b4b
+}

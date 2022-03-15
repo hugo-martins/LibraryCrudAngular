@@ -1,0 +1,40 @@
+<form>
+  <div class="bookPurchase-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Referência do Livro</mat-label>
+      <input matInput placeholder="form" [formControl]="bookID">
+    </mat-form-field>
+  </div>
+</form>
+
+<form [formGroup]="saleForm" class="row g-3">
+
+  <div class="cliendId-container">
+    <mat-form-field appearance="fill">
+      <mat-label>ClientId</mat-label>
+      <input matInput placeholder="form" formControlName = "clientId">
+    </mat-form-field>
+  </div>
+
+  <div class="valuePurchase-container">
+    <mat-form-field appearance="fill">
+      <mat-label>valuePurchase</mat-label>
+      <input matInput placeholder="form" formControlName = "valuePurchase">
+    </mat-form-field>
+  </div>
+  <div class="status-container">
+    <mat-radio-group formControlName ="status">
+      <mat-radio-button value="COMPLETED">COMPLETED</mat-radio-button>
+      <mat-radio-button value="FINISHED">FINISHED</mat-radio-button>
+      <mat-radio-button value="PENDING">PENDING</mat-radio-button>
+      <mat-radio-button value="CLOSED">CLOSED</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+
+  </form>
+
+  <button mat-raised-button (click)="createSale()" color = "primary"> Salvar </button>
+  <button mat-raised-button (click)="cancel()"> Cancelar </button>
+
+

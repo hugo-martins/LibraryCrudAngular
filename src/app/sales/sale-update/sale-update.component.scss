@@ -1,0 +1,19 @@
+form{
+  display: flex;
+  flex-direction: column;
+}
+.edit{
+  margin-right: 10px;
+}
+
+.edit > i {
+  color: #d9cd26;
+}
+
+.delete > i {
+  color:#a34b4b
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 30px;
+  margin-bottom: 30px;
+}

@@ -1,0 +1,52 @@
+
+<mat-toolbar  color="primary">
+    <span>
+    Library
+    </span>
+</mat-toolbar>
+
+<mat-sidenav-container class="container">
+  <mat-sidenav class="sidenav" mode="side" opened
+  fixedInViewport="true" fixedTopGap="64">
+
+    <mat-nav-list class="nav-list">
+
+    <a mat-list-item routerLink="/">
+      <i class="material-icons">
+        home
+      </i>
+      Início
+    </a>
+
+    <a mat-list-item routerLink="books">
+      <i class="material-icons">
+        book
+      </i>
+      Livros
+    </a>
+
+    <a mat-list-item routerLink="clients" >
+      <i class="material-icons">
+      perm_identity
+
+      </i>
+      Clientes
+    </a>
+
+    <a mat-list-item routerLink="sales">
+      <i class="material-icons">
+       store
+      </i>
+      Vendas
+    </a>
+  </mat-nav-list>
+
+</mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+

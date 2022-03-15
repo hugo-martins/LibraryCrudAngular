@@ -1,0 +1,66 @@
+<mat-card>
+  <mat-toolbar color= "primary"> Lista de Clientes </mat-toolbar>
+
+ <div *ngIf = "clients$ | async as client; else loading" >
+  <table mat-table [dataSource]= "client" class="mat-elevation-z8">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let client">{{ client.name }}</td>
+    </ng-container>
+
+
+    <!-- Age Column -->
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef>Idade</th>
+      <td mat-cell *matCellDef="let client">{{ client.age }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let client">{{ client.email }}</td>
+    </ng-container>
+
+    <!-- Número Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Contato</th>
+      <td mat-cell *matCellDef="let client">{{ client.phone }}</td>
+    </ng-container>
+
+    <!-- Sex Column -->
+    <ng-container matColumnDef="sex">
+      <th mat-header-cell *matHeaderCellDef>Sexo</th>
+      <td mat-cell *matCellDef="let client">{{ client.sex }}</td>
+    </ng-container>
+
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Ações</th>
+    <td mat-cell *matCellDef="let row">
+
+    <a routerLink="/clients/{{ row.id }}"class="edit">
+      <i class="material-icons">edit</i>
+    </a>
+
+    <a routerLink="/clients/client-delete/{{ row.id }}" class="delete">
+     <i class="material-icons">delete</i>
+   </a>
+    </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table >
+</div>
+
+<ng-template #loading>
+
+<div class="loading-spinner">
+<mat-spinner></mat-spinner>
+</div>
+</ng-template>
+</mat-card>
+<button mat-raised-button (click)="navigateToClientCreate()" color="primary"> Cadastrar cliente</button>
+

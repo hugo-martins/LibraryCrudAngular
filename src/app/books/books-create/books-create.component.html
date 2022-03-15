@@ -1,0 +1,59 @@
+<form [formGroup]="bookForm" class="row g-3">
+
+<div class="title-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Título</mat-label>
+    <input matInput placeholder="form" formControlName = "title">
+  </mat-form-field>
+</div>
+<div class="synopsis-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Sinopse</mat-label>
+    <input matInput placeholder="form" formControlName = "synopsis">
+  </mat-form-field>
+</div>
+<div class="isbn-container">
+  <mat-form-field appearance="fill">
+    <mat-label>isbn</mat-label>
+    <input matInput placeholder="form" formControlName = "isbn">
+  </mat-form-field>
+</div>
+<div class="author-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Autor</mat-label>
+    <input matInput placeholder="form" formControlName = "author">
+  </mat-form-field>
+</div>
+<div class="publicationYear-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Ano de publicação</mat-label>
+    <input matInput placeholder="form" formControlName = "publicationYear">
+  </mat-form-field>
+</div>
+  <div class="priceSell-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Preço de venda </mat-label>
+      <input matInput placeholder="form" formControlName = "priceSell">
+    </mat-form-field>
+</div>
+<div class="availableQuantity-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Quantidade</mat-label>
+    <input matInput placeholder="form" formControlName = "availableQuantity">
+  </mat-form-field>
+</div>
+</form>
+
+<form>
+<div class="category-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Categoria</mat-label>
+    <input matInput placeholder="form" [formControl]="categoryName">
+  </mat-form-field>
+</div>
+</form>
+
+<button mat-raised-button (click)="createBook()" color = "primary"> Salvar </button>
+<button mat-raised-button (click)="cancel()"> Cancelar </button>
+
+

@@ -1,0 +1,29 @@
+table {
+  width: 300%;
+}
+
+.loading-spinner {
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.edit{
+  margin-right: 10px;
+}
+
+.edit> i {
+   color: #22200b;
+}
+
+.delete > i {
+  color: red;
+}
+
