@@ -17,7 +17,9 @@ export class BooksCreateComponent implements OnInit {
 
   book: Book;
 
-  public categoryName =  new FormControl([]);
+
+  categoriesNames:Category[] = [];
+
 
   public bookForm: FormGroup;
 
@@ -40,13 +42,13 @@ export class BooksCreateComponent implements OnInit {
       'availableQuantity': new FormControl(''),
       'categories': new FormControl([])
 
-  })
+    })
+    this.bookService.listCategoriesAll().subscribe(categories=>{
+      this.categoriesNames=categories;
+    });
   }
 
   createBook(): void {
-
-      let c = new Category(this.categoryName.value)
-      this.bookForm.get('category')?.setValue([c]);
       this.bookService.registerBooks(this.bookForm.value).subscribe(()=>{
       this.bookService.showMessage('Livro Criado!')
       this.router.navigate(['/books']);
@@ -57,15 +59,9 @@ export class BooksCreateComponent implements OnInit {
     this.router.navigate(['/books']);
   }
 
-  onSubmit(): void{
-    let c = new Category(this.categoryName.value)
-    this.bookForm.get('categories')?.setValue([c]);
-  }
 
-  print(){
-    let c = new Category(this.categoryName.value)
-    console.log(c);
-    this.bookForm.get('categories')?.setValue([c]);
+
+  printJson(){
     console.log(JSON.stringify(this.bookForm.value));
 
   }

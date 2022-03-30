@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Category } from '../model/Category';
 
 
 @Component({
@@ -17,6 +18,10 @@ export class BookUpdateComponent implements OnInit {
   public bookFormUpdate: FormGroup;
   book: Book;
   loading: Boolean = true;
+
+  categoriesNames:Category[] = [];
+
+
 
   constructor(
     private bookService:BooksService,
@@ -32,6 +37,12 @@ export class BookUpdateComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id);
 
+
+    this.bookService.listCategoriesAll().subscribe(categories=>{
+    this.categoriesNames=categories;
+    console.log('Log', this.categoriesNames);
+
+
     this.bookService.findBookById(<string>id).subscribe((book)=>{
       this.loading = false;
       this.book = book;
@@ -46,6 +57,8 @@ export class BookUpdateComponent implements OnInit {
         'categories': new FormControl(book.categories)
       })}
      )
+    })
+
   }
 
   updateBook(): void {
@@ -73,6 +86,14 @@ export class BookUpdateComponent implements OnInit {
 
   print(){
    console.log(this.bookFormUpdate.value);
+
+  }
+
+
+  public equalsSelect(objOne: any, objTwo: any): boolean {
+    console.log(objTwo ? objOne.id === objTwo.id : false)
+    return objTwo ? objOne.id === objTwo.id : false;
+
 
   }
 
