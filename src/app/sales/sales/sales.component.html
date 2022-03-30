@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-toolbar color= "primary"> Tabela de vendas! </mat-toolbar>
+  <mat-toolbar class="toobar" color= "primary"> Tabela de vendas! </mat-toolbar>
 
  <div *ngIf = "sales$ | async as sales; else loading" >
   <table mat-table [dataSource]="sales" class="mat-elevation-z8">
@@ -7,7 +7,7 @@
     <!-- Client ID Column -->
     <ng-container matColumnDef="client">
       <th mat-header-cell *matHeaderCellDef>Cliente</th>
-      <td mat-cell *matCellDef="let sale">{{ sale.client[0].name }}</td>
+      <td mat-cell *matCellDef="let sale">{{ sale.client.name }}</td>
     </ng-container>
 
 

@@ -4,9 +4,9 @@ import { Status } from './status';
 
 export interface Sale {
   id?: string,
-  client: Array<Client>,
-  bookPurchase: Array<Book>,
-  datePurchase: string
+  client: Client,
+  bookPurchase: Book[],
+  datePurchase: string,
   valuePurchase: number,
   status: Status
 }

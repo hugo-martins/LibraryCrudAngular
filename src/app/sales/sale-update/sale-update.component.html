@@ -1,19 +1,25 @@
-
 <form [formGroup]="saleFormUpdate" *ngIf="!loading"  class="row g-3">
-
-
-  <div class="cliendId-container">
+  <div class="book-container">
     <mat-form-field appearance="fill">
-      <mat-label>ClientId</mat-label>
-      <input matInput placeholder="form" formControlName = "clientId">
+      <mat-label>Selecione um Livro</mat-label>
+      <mat-select [compareWith]="equalsSelect" placeholder="form" formControlName = "bookPurchase" multiple>
+      <mat-option *ngFor="let book of bookObject" [value]="book">
+          {{book.title}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-  </div>
-  <div class="bookPurchase-container">
-    <mat-form-field appearance="fill">
-      <mat-label>Livro</mat-label>
-      <input matInput placeholder="form" formControlName = "bookPurchase">
-    </mat-form-field>
-  </div>
+    </div>
+
+    <div class="client-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Selecione um Cliente</mat-label>
+        <mat-select [compareWith]="equalsSelect"  placeholder="form" formControlName = "client">
+        <mat-option *ngFor="let client of clientObject" [value]="client">
+            {{client.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
 
   <div class="valuePurchase-container">
     <mat-form-field appearance="fill">

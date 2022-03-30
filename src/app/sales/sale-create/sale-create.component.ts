@@ -1,10 +1,13 @@
-import { bookPurchase } from './../model/bookPurchase';
+import { BooksService } from './../../books/services/books.service';
+import { ClientService } from './../../clients/services/client.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Sale } from '../model/sale';
 import { SalesService } from '../services/sales.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Book } from 'src/app/books/model/book';
+import { Client } from 'src/app/clients/model/client';
 
 @Component({
   selector: 'app-sale-create',
@@ -17,12 +20,13 @@ export class SaleCreateComponent implements OnInit {
   sale: Sale;
   public saleForm:FormGroup;
 
-  public bookID =  new FormControl([]);
-
-
+  bookObject: Book[] = [];
+  clientObject: Client[] = [];
 
   constructor(
     private saleService: SalesService,
+    private clientService: ClientService,
+    private bookService: BooksService,
     private router: Router,
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -30,36 +34,41 @@ export class SaleCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.saleForm = this.fb.group({
-      'client': new FormControl(''),
+      'client': new FormControl(),
       'bookPurchase': new FormControl([]),
       'valuePurchase': new FormControl(''),
       'status': new FormControl('')
-
     })
-  }
 
-  createSale(): void {
-    let c = new bookPurchase(this.bookID.value)
-    this.saleForm.get('bookPurchase')?.setValue([c]);
-    const value = this.saleForm.value;
-    this.saleService.registerSale(this.saleForm.value).subscribe(()=>{
+    this.bookService.listBooksAll().subscribe(bookPurchase =>{
+      this.bookObject = Array.from(bookPurchase);
+    })
+
+    this.clientService.listClientsAll().subscribe(client =>{
+      this.clientObject = client;
+    })
+
+}
+
+
+createSale(): void {
+
+  this.saleService.registerSale(this.saleForm.value).subscribe(()=>{
     this.saleService.showMessage('Venda Criada!')
-    this.router.navigate(['/sales']);
+      this.router.navigate(['/sales']);
   })
 }
 
-cancel(): void{
-  this.router.navigate(['/sales']);
+  cancel(): void{
+    this.router.navigate(['/sales']);
 }
 
-onSubmit(): void{
-  console.log(this.saleForm.value);
+  onSubmit(): void{
+    console.log(this.saleForm.value);
 }
 
-print(){
-  console.log(new bookPurchase(this.bookID.value));
-
-  console.log((this.saleForm.value));
+  print(){
+    console.log((this.saleForm.value));
 
 }
 

@@ -1,24 +1,28 @@
-<form>
-  <div class="bookPurchase-container">
-    <mat-form-field appearance="fill">
-      <mat-label>Referência do Livro</mat-label>
-      <input matInput placeholder="form" [formControl]="bookID">
-    </mat-form-field>
-  </div>
-</form>
-
 <form [formGroup]="saleForm" class="row g-3">
-
-  <div class="cliendId-container">
+  <div>
     <mat-form-field appearance="fill">
-      <mat-label>ClientId</mat-label>
-      <input matInput placeholder="form" formControlName = "clientId">
+      <mat-label>Selecione um Livro</mat-label>
+      <mat-select placeholder="form" formControlName = "bookPurchase" multiple>
+      <mat-option *ngFor="let book of bookObject" [value]="book">
+          {{book.title}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-  </div>
+    </div>
 
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Selecione um Cliente</mat-label>
+        <mat-select placeholder="form" formControlName = "client">
+        <mat-option *ngFor="let client of clientObject" [value]="client">
+            {{client.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
   <div class="valuePurchase-container">
     <mat-form-field appearance="fill">
-      <mat-label>valuePurchase</mat-label>
+      <mat-label>Valor da venda</mat-label>
       <input matInput placeholder="form" formControlName = "valuePurchase">
     </mat-form-field>
   </div>
@@ -30,7 +34,6 @@
       <mat-radio-button value="CLOSED">CLOSED</mat-radio-button>
     </mat-radio-group>
   </div>
-
 
   </form>
 

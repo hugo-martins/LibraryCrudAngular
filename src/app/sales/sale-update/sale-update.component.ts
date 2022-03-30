@@ -5,7 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Sale } from '../model/sale';
 import { ErrorDialogComponent } from 'src/app/shared/error-dialog/error-dialog.component';
-import { bookPurchase } from '../model/bookPurchase';
+import { ClientService } from 'src/app/clients/services/client.service';
+import { BooksService } from 'src/app/books/services/books.service';
+import { Book } from 'src/app/books/model/book';
+import { Client } from 'src/app/clients/model/client';
 
 @Component({
   selector: 'app-sale-update',
@@ -19,10 +22,15 @@ export class SaleUpdateComponent implements OnInit {
   loading: Boolean = true;
   public bookID =  new FormControl([]);
 
+  bookObject: Book[] = [];
+  clientObject: Client[] = [];
+
 
 
   constructor(
     private saleService: SalesService,
+    private clientService: ClientService,
+    private bookService: BooksService,
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
@@ -34,7 +42,7 @@ export class SaleUpdateComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id);
 
-    this.saleService.findSaleById(<string>id).subscribe((sale)=>{
+      this.saleService.findSaleById(<string>id).subscribe((sale)=>{
       this.loading = false;
       this.sale = sale;
       this.saleFormUpdate = this.fb.group({
@@ -44,13 +52,20 @@ export class SaleUpdateComponent implements OnInit {
         'status': new FormControl(sale.status),
       })}
      )
+
+     this.bookService.listBooksAll().subscribe(books =>{
+      this.bookObject = books;
+    })
+
+    this.clientService.listClientsAll().subscribe(clients =>{
+      this.clientObject = clients;
+    })
   }
   updateSale(): void {
 
     const value = this.saleFormUpdate.value;
     value.id = this.sale.id
-    this.saleService.updateSale(value)
-   .subscribe(()=>{
+    this.saleService.updateSale(value).subscribe(()=>{
       this.saleService.showMessage('Venda Atualizada!')
       this.router.navigate(['/sales']);
       }
@@ -69,9 +84,15 @@ export class SaleUpdateComponent implements OnInit {
   }
 
   print(){
-    console.log(new bookPurchase(this.bookID.value));
 
     console.log((this.saleFormUpdate.value));
+
+  }
+
+  public equalsSelect(objOne: any, objTwo: any): boolean {
+    console.log(objTwo ? objOne.id === objTwo.id : false)
+    return objTwo ? objOne.id === objTwo.id : false;
+
 
   }
 

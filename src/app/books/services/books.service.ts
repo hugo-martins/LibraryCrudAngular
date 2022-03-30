@@ -29,6 +29,14 @@ export class BooksService {
    );
   }
 
+  listCategoriesAll(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(`${this.URL}/all`)
+    .pipe(
+      first(),
+      tap( categories=> console.log(categories))
+    );
+   }
+
 
 
 
